@@ -1560,9 +1560,9 @@ const heroBg = document.querySelector('.hero-bg');
 window.addEventListener('scroll', () => {
   const scrolled = window.pageYOffset;
   const heroHeight = document.querySelector('.hero').offsetHeight;
-  if (scrolled < heroHeight * 1.5) {
-    heroBg.style.opacity = Math.max(0, 0.14 - (scrolled / heroHeight) * 0.14);
-  }
+  const progress = Math.min(scrolled / heroHeight, 1);
+  const opacity = 0.14 - (progress * 0.08);
+  heroBg.style.opacity = Math.max(0.06, opacity);
 }, { passive: true });
 </script>
 </body>
