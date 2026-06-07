@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Leo Proof — 1891 · 2026</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><text x='16' y='22' text-anchor='middle' font-size='20' fill='%23f0ece4'>✠</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -1565,5 +1566,53 @@ window.addEventListener('scroll', () => {
   leoImg.style.opacity = Math.max(0.06, opacity);
 }, { passive: true });
 </script>
+
+<!-- GREGORIAN CHANT PLAYER -->
+<div id="yt-player" style="position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;overflow:hidden;z-index:0;">
+  <iframe id="yt-iframe" width="1" height="1" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
+<button id="chant-btn" onclick="toggleChant()" title="Toggle Gregorian Chant" style="
+  position:fixed;
+  bottom:2rem;
+  right:2rem;
+  z-index:999;
+  background:rgba(0,0,0,0.85);
+  border:1px solid #1c1c1a;
+  color:#2a2a28;
+  font-size:18px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:color 0.3s, border-color 0.3s;
+  font-family:serif;
+  padding:0;
+">✠</button>
+
+<script>
+let playing = false;
+const btn = document.getElementById('chant-btn');
+const iframe = document.getElementById('yt-iframe');
+const SRC = 'https://www.youtube.com/embed/xERuXyDeVqc?autoplay=1&loop=1&playlist=xERuXyDeVqc&controls=0&start=0&mute=0';
+
+function toggleChant() {
+  if (!playing) {
+    iframe.src = SRC;
+    btn.style.color = '#f0ece4';
+    btn.style.borderColor = '#444';
+    playing = true;
+  } else {
+    iframe.src = '';
+    btn.style.color = '#2a2a28';
+    btn.style.borderColor = '#1c1c1a';
+    playing = false;
+  }
+}
+</script>
+
 </body>
 </html>
