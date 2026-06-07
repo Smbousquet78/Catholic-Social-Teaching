@@ -190,7 +190,7 @@ body {
 .main {
   position: relative;
   z-index: 10;
-  background: var(--bg);
+  background: rgba(0,0,0,0.88);
 }
 
 /* ENCYCLICAL SECTION */
@@ -593,9 +593,9 @@ body {
 </head>
 <body>
 
-<!-- FIXED PARALLAX BACKGROUND -->
-<div class="hero-bg">
-  <img src="leo-xiii.jpg" alt="Pope Leo XIII, 1878–1903" />
+<!-- FIXED FULL PAGE BACKGROUND -->
+<div id="leo-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden;">
+  <img id="leo-img" src="leo-xiii.jpg" alt="Pope Leo XIII" style="width:100%;height:100%;object-fit:cover;object-position:65% top;filter:grayscale(100%) contrast(1.1);opacity:0.14;"/>
 </div>
 
 <!-- HERO -->
@@ -1556,13 +1556,13 @@ const observer = new IntersectionObserver((entries) => {
 
 sections.forEach(s => observer.observe(s));
 
-const heroBg = document.querySelector('.hero-bg');
+const leoImg = document.getElementById('leo-img');
 window.addEventListener('scroll', () => {
   const scrolled = window.pageYOffset;
   const heroHeight = document.querySelector('.hero').offsetHeight;
   const progress = Math.min(scrolled / heroHeight, 1);
   const opacity = 0.14 - (progress * 0.08);
-  heroBg.style.opacity = Math.max(0.06, opacity);
+  leoImg.style.opacity = Math.max(0.06, opacity);
 }, { passive: true });
 </script>
 </body>
