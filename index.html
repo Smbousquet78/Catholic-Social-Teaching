@@ -343,6 +343,20 @@ body {
 ::-webkit-scrollbar-track { background: #0d0d0b; }
 ::-webkit-scrollbar-thumb { background: #1a1a1a; }
 
+#chant-player {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+  background: rgba(0,0,0,0.85); border: 1px solid #1c1c1a;
+  padding: 10px 14px; display: flex; align-items: center; gap: 10px;
+}
+#chant-icon {
+  color: #2a2a28; font-size: 16px; cursor: pointer;
+  font-family: serif; transition: color 0.3s;
+  user-select: none;
+}
+#chant-vol {
+  width: 70px; accent-color: #666; cursor: pointer;
+}
+
 @media (max-width: 600px) {
   .loop-row { grid-template-columns: 1fr; }
   .loop-arrow { display: none; }
@@ -788,14 +802,11 @@ body {
   <source src="chant.mp3" type="audio/mpeg">
 </audio>
 
-<button id="chant-btn" onclick="toggleChant()" title="Toggle Gregorian Chant" style="
-  position:fixed;bottom:2rem;right:2rem;z-index:999;
-  background:rgba(0,0,0,0.85);border:1px solid #1c1c1a;
-  color:#2a2a28;font-size:18px;width:40px;height:40px;
-  border-radius:50%;cursor:pointer;display:flex;
-  align-items:center;justify-content:center;
-  transition:color 0.3s, border-color 0.3s;font-family:serif;padding:0;
-">✠</button>
+<div id="chant-player">
+  <span id="chant-icon" onclick="toggleChant()">✠</span>
+  <input type="range" id="chant-vol" min="0" max="1" step="0.05" value="0.6"
+    oninput="document.getElementById('chant-audio').volume=this.value">
+</div>
 
 <script>
 function toggle(btn) {
@@ -830,19 +841,32 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 const audio = document.getElementById('chant-audio');
-const chantBtn = document.getElementById('chant-btn');
+const chantIcon = document.getElementById('chant-icon');
+audio.volume = 0.6;
+let started = false;
+
+function startChant() {
+  if (started) return;
+  started = true;
+  audio.play().then(() => {
+    chantIcon.style.color = '#f0ece4';
+  }).catch(() => { started = false; });
+}
 
 function toggleChant() {
   if (audio.paused) {
-    audio.play();
-    chantBtn.style.color = '#f0ece4';
-    chantBtn.style.borderColor = '#444';
+    audio.play().then(() => {
+      chantIcon.style.color = '#f0ece4';
+      started = true;
+    }).catch(() => {});
   } else {
     audio.pause();
-    chantBtn.style.color = '#2a2a28';
-    chantBtn.style.borderColor = '#1c1c1a';
+    chantIcon.style.color = '#2a2a28';
   }
 }
+
+document.addEventListener('click', startChant, { once: true });
+document.addEventListener('scroll', startChant, { once: true });
 </script>
 
 </body>
