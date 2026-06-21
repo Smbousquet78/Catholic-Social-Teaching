@@ -832,21 +832,7 @@ window.addEventListener('scroll', () => {
 
 <script>
 let playing = false;
-const btn = document.getElementById('chant-btn');
-const iframe = document.getElementById('yt-iframe');
-const SRC = 'https://www.youtube.com/embed/xERuXyDeVqc?autoplay=1&loop=1&playlist=xERuXyDeVqc&controls=0&start=0&mute=0';
-
-function toggleChant() {
-  if (!playing) {
-    iframe.src = SRC;
-    btn.style.color = '#f0ece4';
-    btn.style.borderColor = '#444';
-    playing = true;
-  } else {
-    iframe.src = '';
-    btn.style.color = '#2a2a28';
-    btn.style.borderColor = '#1c1c1a';
-    playing = false;
+const btn = document.getEle
   }
 }
 </script>
