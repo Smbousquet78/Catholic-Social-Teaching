@@ -297,6 +297,27 @@ body {
 .footer { border-top: 1px solid var(--border); padding: 4rem 2rem; text-align: center; max-width: 860px; margin: 0 auto; }
 .footer-cross { font-size: 22px; color: #2a2a28; margin-bottom: 1.5rem; display: block; }
 .footer-text { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: #2a2a28; line-height: 2.5; }
+
+/* HERO */
+.hero { position: relative; height: 100vh; min-height: 600px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+.hero-fade { position: absolute; bottom: 0; left: 0; right: 0; height: 40%; background: linear-gradient(to bottom, transparent, #0d0d0b); z-index: 1; }
+.hero-content { position: relative; z-index: 2; text-align: center; padding: 2rem; max-width: 700px; }
+.hero-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dimmer); margin-bottom: 2.5rem; }
+.hero-year { font-family: var(--mono); font-size: 13px; letter-spacing: 0.15em; color: var(--dimmer); margin-bottom: 1.5rem; }
+.hero-h1 { font-family: var(--serif); font-size: clamp(36px, 6vw, 64px); font-weight: 400; line-height: 1.2; color: var(--white); margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+.hero-sub { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: var(--dimmer); line-height: 2; margin-bottom: 3rem; }
+.hero-rule { width: 1px; height: 80px; background: var(--border); margin: 0 auto 2rem; }
+.hero-scroll { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--dimmer); text-transform: uppercase; animation: pulse 2.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+/* NAV */
+.nav { position: sticky; top: 0; z-index: 100; background: rgba(13,13,11,0.96); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; overflow-x: auto; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
+.nav-logo { font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; color: var(--dimmer); padding: 14px 20px 14px 0; border-right: 1px solid var(--border); margin-right: 8px; white-space: nowrap; flex-shrink: 0; }
+.nav a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dimmer); padding: 14px 12px; white-space: nowrap; text-decoration: none; transition: color 0.2s; border-bottom: 1px solid transparent; flex-shrink: 0; }
+.nav a:hover { color: var(--white); }
+.nav a.active { color: var(--white); border-bottom-color: var(--white); }
+
 </style>
 </head>
 <body>
@@ -1913,4 +1934,3 @@ document.addEventListener('scroll', startChant, { once: true });
 
 </body>
 </html>
-
