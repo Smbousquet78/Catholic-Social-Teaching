@@ -318,6 +318,21 @@ body {
 .nav a:hover { color: var(--white); }
 .nav a.active { color: var(--white); border-bottom-color: var(--white); }
 
+
+/* LEO BACKGROUND — mobile safe */
+#leo-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transition: opacity 0.1s linear;
+}
+@media (max-width: 768px) {
+  #leo-bg { position: absolute; height: 100vh; }
+}
+
 </style>
 </head>
 <body>
@@ -1900,6 +1915,37 @@ function toggle(btn) {
   const content = btn.nextElementSibling;
   content.classList.toggle('open');
 }
+
+// NAV active state
+const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+const sections = document.querySelectorAll('section[id]');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// LEO PARALLAX FADE
+const leoImg = document.getElementById('leo-img');
+let heroHeight = document.querySelector('.hero') ? document.querySelector('.hero').offsetHeight : window.innerHeight;
+
+function updateLeo() {
+  const scrolled = window.pageYOffset || document.documentElement.scrollTop;
+  const progress = Math.min(scrolled / heroHeight, 1);
+  const opacity = Math.max(0.06, 0.28 - (progress * 0.22));
+  if (leoImg) leoImg.style.opacity = opacity;
+}
+
+window.addEventListener('scroll', updateLeo, { passive: true });
+window.addEventListener('resize', () => {
+  heroHeight = document.querySelector('.hero') ? document.querySelector('.hero').offsetHeight : window.innerHeight;
+  updateLeo();
+});
+updateLeo();
 </script>
 
 <audio id="chant-audio" loop>
